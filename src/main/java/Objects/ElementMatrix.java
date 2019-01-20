@@ -1,7 +1,7 @@
 package main.java.Objects;
 
 public class ElementMatrix {
-    public void ElementMatrix(Molecule[] molecules) {
+    public ElementMatrix(Molecule[] molecules) {
 
     }
 }

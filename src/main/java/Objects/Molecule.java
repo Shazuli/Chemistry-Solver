@@ -6,7 +6,7 @@ import java.util.List;
 public class Molecule {
     private List<Element> elements;
 
-    public void Molecule(List<Element> elements) {
+    public Molecule(List<Element> elements) {
         if (elements != null) {
             this.elements = elements;
         } else {

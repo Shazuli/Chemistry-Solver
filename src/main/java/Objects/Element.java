@@ -7,7 +7,7 @@ public class Element {
     private int number;
     private double mass;
 
-    public void Element(String name,int quantity) {
+    public Element(String name,int quantity) {
         this.name = name;
         this.quantity = quantity;
     }

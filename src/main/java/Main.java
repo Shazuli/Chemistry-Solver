@@ -108,30 +108,11 @@ public class Main extends Application implements EventHandler {
                 tempM.addElement(e);
             }
         }
-        System.out.println(
-                ((Molecule) temp[0].get(0)).getElement(1).getName()
-        );
-        /*Element e;
-        boolean newMol = true;
-        for (int i=0;i<ell.size();i++) {
-            //System.out.println(temp[0].size());
-            e = ell.get(i);
-            //print("'"+e.getName()+"'");
-            if (newMol) {
-                temp[side].add(new Molecule());
-                newMol=false;
-            } else {
-                ((Molecule)temp[side].get(temp[side].size()-1)).addElement(e);
-            }
-            if (e.getName().charAt(0) == "+".charAt(0)) {
-                newMol = true;
-                continue;
-            }
-            if (e.getName().charAt(0) == "=".charAt(0) || e.getName().charAt(0) == ">".charAt(0)) {
-                newMol = true;
-                side = 1;
-            }
-        }*/
+        temp[1].add(tempM);
+        /*System.out.println(
+                ((Molecule) temp[1].get(1)).getElement(1).getName()
+        );*/
+
 
         //System.out.println(((Molecule) temp[1].get(0)).getElement(0).getName());
         //System.out.println(((Molecule) temp[1].get(0)).getElement(1).getName());

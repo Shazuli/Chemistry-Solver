@@ -1,0 +1,49 @@
+{
+  "elements": [
+    {
+      "name":"H",
+      "number":1,
+      "title":"element.H",
+      "type":"non-metal",
+      "mass":1.008,
+      "shells": [1],
+      "grid":[1,1]
+    },
+    {
+      "name":"He",
+      "number":2,
+      "title":"element.He",
+      "type":"non-metal",
+      "mass":4.0,
+      "shells": [2],
+      "grid":[18,1]
+    },
+    {
+      "name":"Li",
+      "number":3,
+      "title":"element.Li",
+      "type":"metal",
+      "mass":6.94,
+      "shells": [2,1],
+      "grid":[1,2]
+    },
+    {
+      "name":"Be",
+      "number":4,
+      "title":"element.Be",
+      "type":"metal",
+      "mass":9.01,
+      "shells": [2,2],
+      "grid":[2,2]
+    },
+    {
+      "name":"B",
+      "number":5,
+      "title":"element.B",
+      "type":"non-metal",
+      "mass":10.8,
+      "shells": [2,3],
+      "grid":[13,2]
+    }
+  ]
+}

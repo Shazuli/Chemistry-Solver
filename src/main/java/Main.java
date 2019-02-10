@@ -14,6 +14,7 @@ import main.java.Objects.Element;
 import main.java.Objects.Molecule;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -27,6 +28,7 @@ public class Main extends Application implements EventHandler {
     //GUI Elements
     private TextField input;
     private Button format;
+    public static Button openPerTab;
 
     //Objects
     public static List<Element> Elements = new ArrayList<>();
@@ -49,8 +51,8 @@ public class Main extends Application implements EventHandler {
             new ArrayList<Molecule>(),
             new ArrayList<Molecule>()
         };
+        //Arrays.stream(formula.replaceAll("[^ A-z0-9]","").replaceAll(" ", " ").split(" ")).parallel().forEach(el -> temp[0].add(new Molecule(el)));
         List<Element> ell = new ArrayList<>();
-        boolean newMol = true;
         String crnN = null;
         int crnQ=0;
         int side = 0;
@@ -71,12 +73,56 @@ public class Main extends Application implements EventHandler {
                 crnN = crnN + d;
             }
         }
-        Element e;
+        /*for (Element f: ell) {
+            System.out.println(f.getName()+": "+f.getQuantity());
+        }*/
+        Molecule tempM = new Molecule();
+        boolean newMol = false;
+        for (Element e:ell) {
+            String n = e.getName();
+
+            if (n.charAt(0) == "+".charAt(0)) {
+                newMol = true;
+                temp[side].add(tempM);
+                tempM = new Molecule();
+                //continue;
+            }
+            if (n.charAt(0) == "=".charAt(0)) {
+                newMol = true;
+                if (side == 0)
+                    temp[side].add(tempM);
+                side = 1;
+                tempM = new Molecule();
+                //continue;
+            }
+            if (n.charAt(0) == ">".charAt(0)) {
+                side = 1;
+                tempM = new Molecule();
+                continue;
+            }
+            if (newMol) {
+                //temp[side].add(tempM);
+                //tempM = new Molecule();
+                newMol = false;
+            } else {
+                tempM.addElement(e);
+            }
+        }
+        System.out.println(
+                ((Molecule) temp[0].get(0)).getElement(1).getName()
+        );
+        /*Element e;
+        boolean newMol = true;
         for (int i=0;i<ell.size();i++) {
             //System.out.println(temp[0].size());
             e = ell.get(i);
             //print("'"+e.getName()+"'");
-
+            if (newMol) {
+                temp[side].add(new Molecule());
+                newMol=false;
+            } else {
+                ((Molecule)temp[side].get(temp[side].size()-1)).addElement(e);
+            }
             if (e.getName().charAt(0) == "+".charAt(0)) {
                 newMol = true;
                 continue;
@@ -84,22 +130,11 @@ public class Main extends Application implements EventHandler {
             if (e.getName().charAt(0) == "=".charAt(0) || e.getName().charAt(0) == ">".charAt(0)) {
                 newMol = true;
                 side = 1;
-                continue;
             }
-
-            if (newMol) {
-                temp[0].add(new Molecule());
-                newMol=false;
-            } else {
-                ((Molecule)temp[0].get(temp[0].size()-1)).addElement(e);
-            }
-        }
+        }*/
 
         //System.out.println(((Molecule) temp[1].get(0)).getElement(0).getName());
-        for (Object f:temp[0]) {
-            System.out.println(((Molecule) f).getElements().get(0).getName());
-
-        }
+        //System.out.println(((Molecule) temp[1].get(0)).getElement(1).getName());
         /*toRet[0] = new Molecule[temp[0].size()];
         toRet[0] = temp[0].toArray(toRet[0]);*/
         //System.out.println(((Molecule) temp[0].get(0)).getElement(0).getName());
@@ -209,15 +244,29 @@ public class Main extends Application implements EventHandler {
 
         input = new TextField("C6H14 + O2 => CO2 + H2O");
         format = new Button("Format Text");
+        openPerTab = new Button("Periodic Table");
 
         input.setAlignment(Pos.CENTER);
         input.setTranslateY((-height*0.5)+input.getHeight()+10);
         format.setTranslateX((-width*0.5)+format.getWidth()+49);
         format.setTranslateY((-height*0.5)+input.getHeight()+37);
+        //openPerTab.setTranslateX((-width*0.5)-format.getWidth()+49);
+        openPerTab.setTranslateY((height*0.5)-13);
+        openPerTab.setTranslateX((-width*0.5)+format.getWidth()+55);
         layout.getChildren().add(input);
         layout.getChildren().add(format);
+        layout.getChildren().add(openPerTab);
 
-        format.setOnMouseClicked(this);
+        format.setOnMouseClicked(event -> {
+            format.setDisable(true);
+            formatFormula(input.getText());
+            format.setDisable(false);
+        });
+        openPerTab.setOnMouseClicked(event -> {
+            openPerTab.setDisable(true);
+            new PeriodicTable();
+        });
+
 
 
 
@@ -229,7 +278,7 @@ public class Main extends Application implements EventHandler {
 
     @Override
     public void handle(Event event) {
-        if (event.getSource() == format) {
+        /*if (event.getSource() == format) {
             format.setDisable(true);
             // TODO Separator of formula goes here, disables the button while processing large values.
 
@@ -240,7 +289,7 @@ public class Main extends Application implements EventHandler {
 
 
             format.setDisable(false);
-        }
+        }*/
 
     }
 }

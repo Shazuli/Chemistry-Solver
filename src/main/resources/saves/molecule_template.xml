@@ -1,0 +1,9 @@
+<molecule>
+    <title>Something fancy</title>
+    <Cu>
+        <quantity>1</quantity>
+    </Cu>
+    <Au>
+        <quantity>4</quantity>
+    </Au>
+</molecule>

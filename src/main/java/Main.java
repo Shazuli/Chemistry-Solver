@@ -14,7 +14,6 @@ import main.java.Objects.Element;
 import main.java.Objects.Molecule;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -45,7 +44,7 @@ public class Main extends Application implements EventHandler {
         }
     }
 
-    public void formatFormula(String formula) {
+    public Molecule[][] ParseString(String formula) {
         //Molecule[][] toRet = new Molecule[2][];
         List[] temp = new List[] {
             new ArrayList<Molecule>(),
@@ -73,9 +72,7 @@ public class Main extends Application implements EventHandler {
                 crnN = crnN + d;
             }
         }
-        /*for (Element f: ell) {
-            System.out.println(f.getName()+": "+f.getQuantity());
-        }*/
+
         Molecule tempM = new Molecule();
         boolean newMol = false;
         for (Element e:ell) {
@@ -109,88 +106,16 @@ public class Main extends Application implements EventHandler {
             }
         }
         temp[1].add(tempM);
-        /*System.out.println(
-                ((Molecule) temp[1].get(1)).getElement(1).getName()
-        );*/
 
-
-        //System.out.println(((Molecule) temp[1].get(0)).getElement(0).getName());
-        //System.out.println(((Molecule) temp[1].get(0)).getElement(1).getName());
-        /*toRet[0] = new Molecule[temp[0].size()];
-        toRet[0] = temp[0].toArray(toRet[0]);*/
-        //System.out.println(((Molecule) temp[0].get(0)).getElement(0).getName());
-    }
-
-    public Element[] separate(String form) {
-        List<Element> toRet = new ArrayList<>();
-        int t=0;
-        String currentN = null;
-        int currentQ = 0;
-        for (int i=0;i<form.length()+1;i++) {
-            String d;
-            try {
-                d = form.substring(i,i+1);
-            } catch (Exception e) {
-                break;
-            }
-            //print("ddd "+d);
-            if (d!=" ") {
-                if (isNumber(d)) {
-                    currentQ = currentQ + Integer.parseInt(d);
-                } else if (d == d.toUpperCase()) {
-                    if (currentN != null)
-                        toRet.add(new Element(currentN,currentQ));
-                    currentN = d;
-                    currentQ = 0;
-                } else {
-                    currentN = currentN + d;
-                }
-            }
-        }
-        Element[] x = new Element[toRet.size()];
-        x = toRet.toArray(x);
-        return x;
-    }
-
-    public List<Molecule>[] createMolecules(Element[] listRaw) {
-        //List<List<Molecule>> toRet = new ArrayList<>();
-        List[] toRet = new List[] {
-                new ArrayList<Molecule>(),
-                new ArrayList<Molecule>()
+        return new Molecule[][]{
+                ((Molecule[]) temp[0].toArray(new Molecule[temp[0].size()])),
+                ((Molecule[]) temp[1].toArray(new Molecule[temp[1].size()]))
         };
-        //toRet[0] = new ArrayList<Molecule>();
-        //toRet[1] = new ArrayList<Molecule>();
-        //toRet.get(0) = new ArrayList<>();
-        /*toRet[0] = new ArrayList<Molecule>();
-        toRet[1] = new ArrayList<Molecule>();*/
-        Boolean newMol = true;
-        int k = 0;
 
-        for (int i=0;i<listRaw.length;i++) {
-            if (newMol) {
-                toRet[k].add(new Molecule());
-                newMol = false;
-            }
-            Element e = listRaw[k];
-            if (e.getName() == "+") {
-                newMol = true;
-                continue;
-            }
-            if (e.getName() == "=") {
-                k = 1;
-                continue;
-            }
-            if (e.getName() == ">") {
-                k = 1;
-                continue;
-            }
-            //toRet[k].get(toRet[k].size()-1).addElement(e);
-            ((Molecule) toRet[k].get(toRet[k].size()-1)).addElement(e);
-            //Molecule x = ((Molecule) toRet[k].get(0));
-            //toRet[k].get(0);
-
-        }
-        return toRet;
+        /*Molecule[][] toRet = new Molecule[2][];
+        toRet[0] = ((Molecule[]) temp[0].toArray(new Molecule[temp[0].size()]));
+        toRet[1] = ((Molecule[]) temp[1].toArray(new Molecule[temp[1].size()]));*/
+        //return toRet;
     }
 
 
@@ -240,7 +165,8 @@ public class Main extends Application implements EventHandler {
 
         format.setOnMouseClicked(event -> {
             format.setDisable(true);
-            formatFormula(input.getText());
+            InputMolecules = ParseString(input.getText());
+            //System.out.println(InputMolecules[0][0].getElement(0).getName());
             format.setDisable(false);
         });
         openPerTab.setOnMouseClicked(event -> {
@@ -266,7 +192,7 @@ public class Main extends Application implements EventHandler {
             //InputMolecules = createMolecules(separate(input.getText()));
             //System.out.print(separate(input.getText()));
             //System.out.println(InputMolecules[0].get(0).getElement(0).getName());
-            formatFormula(input.getText());
+            ParseString(input.getText());
 
 
             format.setDisable(false);

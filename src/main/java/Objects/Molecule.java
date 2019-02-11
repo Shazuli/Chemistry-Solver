@@ -17,9 +17,7 @@ public class Molecule {
         }*/
     }
 
-    public List<Element> getElements() {
-        return this.elements;
-    }
+    public Element[] getElements() { return this.elements.toArray(new Element[this.elements.size()]); }
     public Element getElement(int index) { return this.elements.get(index); }
 
     public void setTitle(String title) { this.title = title; }

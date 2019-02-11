@@ -9,7 +9,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import main.java.Api.Draw;
 import main.java.Objects.Element;
 import main.java.Objects.Molecule;
 
@@ -32,6 +34,7 @@ public class Main extends Application implements EventHandler {
     //Objects
     public static List<Element> Elements = new ArrayList<>();
     public static Molecule[][] InputMolecules;
+    public static List<Text> Texts = new ArrayList<>();
 
 
     public static void print(String str) { System.out.println(str); }
@@ -167,6 +170,7 @@ public class Main extends Application implements EventHandler {
             format.setDisable(true);
             InputMolecules = ParseString(input.getText());
             //System.out.println(InputMolecules[0][0].getElement(0).getName());
+            Draw.drawMolecule(InputMolecules[1][0],-150,-50);
             format.setDisable(false);
         });
         openPerTab.setOnMouseClicked(event -> {

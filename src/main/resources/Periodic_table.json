@@ -44,6 +44,33 @@
       "mass":10.8,
       "shells": [2,3],
       "grid":[13,2]
+    },
+    {
+      "name":"c",
+      "number":6,
+      "title":"element.C",
+      "type":"non-metal",
+      "mass":12,
+      "shells": [2,4],
+      "grid":[14,2]
+    },
+    {
+      "name":"N",
+      "number":7,
+      "title":"element.N",
+      "type":"non-metal",
+      "mass":14,
+      "shells": [2,5],
+      "grid":[15,2]
+    },
+    {
+      "name":"O",
+      "number":8,
+      "title":"element.O",
+      "type":"non-metal",
+      "mass":16,
+      "shells": [2,6],
+      "grid":[16,2]
     }
   ]
 }

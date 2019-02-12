@@ -21,7 +21,7 @@ public class Draw {
             nT.setTranslateY(yOffset);
             nT.setFont(new Font(42));
             Main.layout.getChildren().add(nT);
-            Main.Texts.add(nT);
+            //Main.Texts.add(nT);
             if (q > 1) {
                 Text qT = new Text();
                 qT.setText(q+"");
@@ -29,7 +29,7 @@ public class Draw {
                 qT.setTranslateY(16+yOffset);
                 qT.setFont(new Font(15));
                 Main.layout.getChildren().add(qT);
-                Main.Texts.add(qT);
+                //Main.Texts.add(qT);
             }
 
         }

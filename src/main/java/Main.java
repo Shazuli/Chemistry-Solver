@@ -5,6 +5,7 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -12,6 +13,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import main.java.Api.Draw;
+import main.java.Api.Methods;
 import main.java.Objects.Element;
 import main.java.Objects.Molecule;
 
@@ -34,11 +36,11 @@ public class Main extends Application implements EventHandler {
     //Objects
     public static List<Element> Elements = new ArrayList<>();
     public static Molecule[][] InputMolecules;
-    public static List<Text> Texts = new ArrayList<>();
+    //public static List<Text> Texts = new ArrayList<>();
+    public static List<Canvas> canvases = new ArrayList<>();
 
 
-    public static void print(String str) { System.out.println(str); }
-    public static boolean isNumber(String str) {
+    /*public static boolean isNumber(String str) {
         try {
             Integer.parseInt(str);
             return true;
@@ -46,6 +48,8 @@ public class Main extends Application implements EventHandler {
             return false;
         }
     }
+
+
 
     public Molecule[][] ParseString(String formula) {
         //Molecule[][] toRet = new Molecule[2][];
@@ -117,26 +121,26 @@ public class Main extends Application implements EventHandler {
 
         /*Molecule[][] toRet = new Molecule[2][];
         toRet[0] = ((Molecule[]) temp[0].toArray(new Molecule[temp[0].size()]));
-        toRet[1] = ((Molecule[]) temp[1].toArray(new Molecule[temp[1].size()]));*/
+        toRet[1] = ((Molecule[]) temp[1].toArray(new Molecule[temp[1].size()]));
         //return toRet;
-    }
+    }*/
 
 
 
     public static void main(String[] args) {
-        print("Loading all the elements ..");
+        Methods.print("Loading all the elements ..");
         // TODO load in all elements from the JSON file to array.
 
         Elements.add(new Element("H",1));
         Elements.add(new Element("He",1));
 
-        print("Done.");
+        Methods.print("Done.");
 
 
 
-        print("Launching program ..");
+        Methods.print("Launching program ..");
         launch(args);
-        print("Program ended.");
+        Methods.print("Program ended.");
         // TODO save mechanic?
     }
 
@@ -168,9 +172,10 @@ public class Main extends Application implements EventHandler {
 
         format.setOnMouseClicked(event -> {
             format.setDisable(true);
-            InputMolecules = ParseString(input.getText());
+            InputMolecules = Methods.ParseElementsForm(input.getText());
+            layout.getChildren().add(InputMolecules[0][0].draw(0,0));
             //System.out.println(InputMolecules[0][0].getElement(0).getName());
-            Draw.drawMolecule(InputMolecules[1][0],-150,-50);
+            //Draw.drawMolecule(InputMolecules[1][0],-150,-50);
             format.setDisable(false);
         });
         openPerTab.setOnMouseClicked(event -> {
